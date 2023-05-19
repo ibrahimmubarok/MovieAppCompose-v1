@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MovieAppCompose</string>
+    <string name="label_upcoming_movies">Upcoming Movies</string>
+</resources>
