@@ -1,4 +1,4 @@
-package com.dexter.movieappcompose.presentation.ui.screen.home
+package com.dexter.movieappcompose.presentation.screen.home
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
@@ -13,8 +13,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,27 +24,54 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
 import com.dexter.movieappcompose.presentation.ui.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.ui.component.common.MovieItemCard
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
+import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
+import com.dexter.movieappcompose.utils.common.UiState
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val scrollState = rememberScrollState()
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Home Screen",
-            textAlign = TextAlign.Center,
-        )
+        viewModel.upComingMovieData.collectAsState(initial = UiState.Loading).value.let { uiState ->
+            when (uiState) {
+                is UiState.Loading -> {
+                    CircularProgressIndicator()
+                }
+
+                is UiState.Success -> {
+                    if (uiState.data.isEmpty()) {
+                        Text(
+                            text = "Data Kosong",
+                            textAlign = TextAlign.Center,
+                        )
+                    } else {
+                        Text(
+                            text = uiState.data[0].title.toString(),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+
+                is UiState.Error -> {
+                    Text(
+                        text = uiState.errorMessage,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -81,10 +110,10 @@ fun UpcomingMovieContent(
         contentPadding = PaddingValues(bottom = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(movieUpComingData, key = { it.id }) { movie ->
+        items(movieUpComingData, key = { it.id ?: 0 }) { movie ->
             MovieItemCard(
-                photoUrl = movie.posterPath,
-                title = movie.title,
+                photoUrl = movie.posterPath.toString(),
+                title = movie.title.toString(),
                 modifier = Modifier.clickable {
                     onNavigateToDetail()
                 }

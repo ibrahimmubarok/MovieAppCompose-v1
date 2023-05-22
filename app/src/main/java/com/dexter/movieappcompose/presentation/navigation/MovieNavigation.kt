@@ -1,11 +1,13 @@
 package com.dexter.movieappcompose.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dexter.movieappcompose.presentation.screen.home.HomeScreen
 import com.dexter.movieappcompose.presentation.screen.splash.SplashScreen
+import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
 
 @Composable
 fun MovieNavigation() {
@@ -18,7 +20,11 @@ fun MovieNavigation() {
             SplashScreen(navController = navController)
         }
         composable(MovieScreens.HomeScreen.name) {
-            HomeScreen(navController = navController)
+            val homeViewModel = hiltViewModel<HomeViewModel>()
+            HomeScreen(
+                navController = navController,
+                viewModel = homeViewModel
+            )
         }
     }
 }

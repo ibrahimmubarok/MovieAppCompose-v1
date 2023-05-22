@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class BaseResponse<T>(
     @SerializedName("page")
-    val page: Int,
+    val page: Int?,
     @SerializedName("results")
-    val results: List<T>,
+    val results: List<T>?,
     @SerializedName("total_pages")
-    val totalPages: Int,
+    val totalPages: Int?,
     @SerializedName("total_results")
-    val totalResults: Int
+    val totalResults: Int?,
+    @SerializedName("status_message")
+    val message: String?
 )

@@ -1,4 +1,4 @@
-package com.dexter.movieappcompose.presentation.ui
+package com.dexter.movieappcompose.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
