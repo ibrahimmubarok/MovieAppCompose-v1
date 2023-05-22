@@ -3,20 +3,26 @@ package com.dexter.movieappcompose.presentation.ui.screen.home
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
 import com.dexter.movieappcompose.presentation.ui.component.common.BannerTitle
@@ -25,11 +31,19 @@ import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
     modifier: Modifier = Modifier,
-    onNavigateToDetail: () -> Unit,
 ) {
     val scrollState = rememberScrollState()
-
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Home Screen",
+            textAlign = TextAlign.Center,
+        )
+    }
 }
 
 @Composable
@@ -93,8 +107,6 @@ fun PopularMovieContent() {
 @Composable
 fun HomeScreenPreview() {
     MovieAppComposeTheme {
-        HomeScreen(
-            onNavigateToDetail = {}
-        )
+
     }
 }
