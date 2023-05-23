@@ -1,4 +1,4 @@
-package com.dexter.movieappcompose.presentation.component.common
+package com.dexter.movieappcompose.presentation.component.carousell
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

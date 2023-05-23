@@ -33,7 +33,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
-import com.dexter.movieappcompose.presentation.component.common.BannerAutoSlideCarousel
+import com.dexter.movieappcompose.presentation.component.carousell.BannerAutoSlideCarousel
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.MovieItemCard
 import com.dexter.movieappcompose.presentation.ui.theme.Black
@@ -46,6 +46,7 @@ import com.dexter.movieappcompose.utils.common.UiState
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
     ScrollableContent(

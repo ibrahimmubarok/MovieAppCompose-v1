@@ -6,3 +6,9 @@ enum class MovieScreens {
     DetailScreen,
     AboutScreen
 }
+
+sealed class MovieScreen(val route: String) {
+    object HomeScreen : MovieScreen("home")
+    object DetailScreen : MovieScreen("detail")
+    object AboutScreen : MovieScreen("about")
+}
