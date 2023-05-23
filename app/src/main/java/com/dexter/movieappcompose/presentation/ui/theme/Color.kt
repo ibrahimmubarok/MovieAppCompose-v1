@@ -17,5 +17,5 @@ val Pink2 = Color(0xFFBB86FC)
 val Black = Color(0xFF1F1F1F)
 val BlackLight = Color(0xFF222121)
 
-val Chocolate1 = Color(0xFF28281C)
-val Chocolate2 = Color(0xFF353529)
+val Purple1 = Color(0xFF4A4458)
+val Purple2 = Color(0xFF2A2831)

@@ -36,8 +36,8 @@ import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
 import com.dexter.movieappcompose.presentation.component.carousell.BannerAutoSlideCarousel
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.MovieItemCard
-import com.dexter.movieappcompose.presentation.ui.theme.Black
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
+import com.dexter.movieappcompose.presentation.ui.theme.Purple2
 import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
 import com.dexter.movieappcompose.utils.MovieConst
 import com.dexter.movieappcompose.utils.common.UiState
@@ -45,8 +45,8 @@ import com.dexter.movieappcompose.utils.common.UiState
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     ScrollableContent(
@@ -66,7 +66,7 @@ fun ScrollableContent(
     Column(
         modifier = Modifier
             .verticalScroll(scrollState)
-            .background(Black)
+            .background(Purple2)
     ) {
         viewModel.nowPlayingMovieData.collectAsState(initial = UiState.Loading).value.let { uiState ->
             when (uiState) {

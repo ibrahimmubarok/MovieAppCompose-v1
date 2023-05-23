@@ -6,19 +6,21 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.navigation.MovieScreen
 import com.dexter.movieappcompose.presentation.navigation.model.BottomNavItems
-import com.dexter.movieappcompose.presentation.ui.theme.Black
+import com.dexter.movieappcompose.presentation.ui.theme.Purple1
+import com.dexter.movieappcompose.presentation.ui.theme.Purple2
 import com.dexter.movieappcompose.presentation.ui.theme.White1
 
 @Composable
@@ -44,24 +46,25 @@ fun BottomBar(
             )
         )
         NavigationBar(
-            containerColor = Black,
+            containerColor = Purple2,
         ) {
             navItems.map { item ->
                 NavigationBarItem(
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Purple1,
+                        selectedIconColor = Color.White,
+                        unselectedIconColor = White1,
+                        selectedTextColor = Color.White,
+                        unselectedTextColor = White1
+                    ),
                     icon = {
                         Icon(
                             imageVector = item.icon,
                             contentDescription = item.title,
-                            tint = White1
                         )
                     },
                     label = {
-                        Text(
-                            text = item.title,
-                            style = TextStyle(
-                                color = White1
-                            )
-                        )
+                        Text(text = item.title)
                     },
                     selected = currentRoute == item.screen.route,
                     onClick = {

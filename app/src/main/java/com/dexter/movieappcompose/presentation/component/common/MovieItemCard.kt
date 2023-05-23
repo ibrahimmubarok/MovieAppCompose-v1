@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
+import com.dexter.movieappcompose.presentation.ui.theme.Purple1
 import com.dexter.movieappcompose.presentation.ui.theme.PurpleGrey40
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
 import com.dexter.movieappcompose.presentation.ui.theme.White1
@@ -52,7 +53,7 @@ fun MovieItemCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(PurpleGrey40),
+                .background(Purple1),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AsyncImage(

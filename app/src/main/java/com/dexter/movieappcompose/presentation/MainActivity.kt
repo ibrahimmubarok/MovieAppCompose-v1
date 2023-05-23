@@ -9,17 +9,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.component.bottombar.BottomBar
 import com.dexter.movieappcompose.presentation.navigation.MovieScreen
 import com.dexter.movieappcompose.presentation.screen.home.HomeScreen
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
+import com.dexter.movieappcompose.presentation.ui.theme.Purple2
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = colorResource(id = R.color.black),
+                    color = Purple2,
                 ) {
                     MovieApp()
                 }
@@ -45,13 +44,8 @@ fun MovieApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
-//    Column(
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        MovieNavigation()
-//    }
     Scaffold(
+        containerColor = Purple2,
         bottomBar = {
             BottomBar(navController)
         },

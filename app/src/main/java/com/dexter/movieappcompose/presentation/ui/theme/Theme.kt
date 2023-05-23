@@ -66,7 +66,7 @@ fun MovieAppComposeTheme(
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = Black,
+            color = Purple2,
             darkIcons = false
         )
     }
