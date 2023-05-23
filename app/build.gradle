@@ -98,4 +98,10 @@ dependencies {
 
     // Chucker
     implementation "com.github.chuckerteam.chucker:library:3.5.2"
+
+    // Accompanist's Pager
+    implementation 'com.google.accompanist:accompanist-pager:0.22.0-rc'
+
+    // Accompanist's System Bar Customization
+    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.30.1'
 }

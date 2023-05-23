@@ -1,4 +1,4 @@
-package com.dexter.movieappcompose.presentation.ui.component.common
+package com.dexter.movieappcompose.presentation.component.common
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -8,18 +8,24 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
+import com.dexter.movieappcompose.presentation.ui.theme.White1
 
 @Composable
 fun BannerTitle(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = 22.sp
 ) {
     Text(
         text = text,
         style = Typography.headlineMedium.copy(
             fontWeight = FontWeight.ExtraBold,
+            fontSize = fontSize,
+            color = White1
         ),
         modifier = modifier
             .padding(

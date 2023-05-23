@@ -9,6 +9,7 @@ import com.dexter.movieappcompose.utils.network.wrapper.DataResources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,7 +37,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPopularMovies() {
         viewModelScope.launch {
-            repository.getUpcomingMovies().collect { data ->
+            repository.getPopularMovies().collect { data ->
                 when (data) {
                     is DataResources.Error -> {
                         _popularMovieData.value = UiState.Error(data.exception?.message.toString())
@@ -53,19 +54,20 @@ class HomeViewModel @Inject constructor(
 
     private fun getNowPlayingMovies() {
         viewModelScope.launch {
-            repository.getUpcomingMovies().collect { data ->
-                when (data) {
-                    is DataResources.Error -> {
-                        _nowPlayingMovieData.value =
-                            UiState.Error(data.exception?.message.toString())
-                    }
+            repository.getNowPlayingMovies()
+                .collect { data ->
+                    when (data) {
+                        is DataResources.Error -> {
+                            _nowPlayingMovieData.value =
+                                UiState.Error(data.exception?.message.toString())
+                        }
 
-                    is DataResources.Success -> {
-                        _nowPlayingMovieData.value =
-                            UiState.Success(data.payload?.results ?: listOf())
+                        is DataResources.Success -> {
+                            _nowPlayingMovieData.value =
+                                UiState.Success(data.payload?.results?.take(5) ?: listOf())
+                        }
                     }
                 }
-            }
         }
     }
 

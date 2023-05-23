@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MovieAppCompose</string>
     <string name="label_upcoming_movies">Upcoming Movies</string>
+    <string name="label_now_playing_movies">Now Playing Movies</string>
+    <string name="label_empty_data">Data Kosong</string>
+    <string name="label_popular_movies">Popular Movies</string>
+    <string name="label_title">Movie App</string>
 </resources>
