@@ -2,14 +2,14 @@ package com.dexter.movieappcompose.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
 import com.dexter.movieappcompose.data.remote.repository.MovieRepository
+import com.dexter.movieappcompose.domain.model.Movie
+import com.dexter.movieappcompose.domain.model.toMovie
 import com.dexter.movieappcompose.utils.common.UiState
 import com.dexter.movieappcompose.utils.network.wrapper.DataResources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,16 +18,16 @@ class HomeViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    private val _upComingMovieData: MutableStateFlow<UiState<List<ResultResponse>>> =
+    private val _upComingMovieData: MutableStateFlow<UiState<List<Movie>>> =
         MutableStateFlow(UiState.Loading)
-    private val _popularMovieData: MutableStateFlow<UiState<List<ResultResponse>>> =
+    private val _popularMovieData: MutableStateFlow<UiState<List<Movie>>> =
         MutableStateFlow(UiState.Loading)
-    private val _nowPlayingMovieData: MutableStateFlow<UiState<List<ResultResponse>>> =
+    private val _nowPlayingMovieData: MutableStateFlow<UiState<List<Movie>>> =
         MutableStateFlow(UiState.Loading)
 
-    val upComingMovieData: StateFlow<UiState<List<ResultResponse>>> = _upComingMovieData
-    val nowPlayingMovieData: StateFlow<UiState<List<ResultResponse>>> = _nowPlayingMovieData
-    val popularMovieData: StateFlow<UiState<List<ResultResponse>>> = _popularMovieData
+    val upComingMovieData: StateFlow<UiState<List<Movie>>> = _upComingMovieData
+    val nowPlayingMovieData: StateFlow<UiState<List<Movie>>> = _nowPlayingMovieData
+    val popularMovieData: StateFlow<UiState<List<Movie>>> = _popularMovieData
 
     init {
         getUpcomingMovies()
@@ -45,7 +45,11 @@ class HomeViewModel @Inject constructor(
 
                     is DataResources.Success -> {
                         _popularMovieData.value =
-                            UiState.Success(data.payload?.results ?: listOf())
+                            UiState.Success(data.payload?.results
+                                ?.map {
+                                    it.toMovie()
+                                } ?: listOf()
+                            )
                     }
                 }
             }
@@ -64,7 +68,12 @@ class HomeViewModel @Inject constructor(
 
                         is DataResources.Success -> {
                             _nowPlayingMovieData.value =
-                                UiState.Success(data.payload?.results?.take(5) ?: listOf())
+                                UiState.Success(data.payload?.results
+                                    ?.take(5)
+                                    ?.map {
+                                        it.toMovie()
+                                    } ?: listOf()
+                                )
                         }
                     }
                 }
@@ -81,7 +90,11 @@ class HomeViewModel @Inject constructor(
 
                     is DataResources.Success -> {
                         _upComingMovieData.value =
-                            UiState.Success(data.payload?.results ?: listOf())
+                            UiState.Success(data.payload?.results
+                                ?.map {
+                                    it.toMovie()
+                                } ?: listOf()
+                            )
                     }
                 }
             }

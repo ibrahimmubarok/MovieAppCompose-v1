@@ -18,17 +18,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
 import com.dexter.movieappcompose.presentation.ui.theme.White1
 
 @Composable
-fun AboutScreen(
-    navController: NavController,
-    modifier: Modifier = Modifier
-) {
+fun AboutScreen() {
     ProfileContent()
 }
 

@@ -22,9 +22,10 @@ fun MovieNavigation() {
         composable(MovieScreens.HomeScreen.name) {
             val homeViewModel = hiltViewModel<HomeViewModel>()
             HomeScreen(
-                navController = navController,
-                viewModel = homeViewModel
-            )
+                viewModel = homeViewModel,
+            ) {
+
+            }
         }
     }
 }

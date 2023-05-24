@@ -2,7 +2,7 @@ package com.dexter.movieappcompose.data.remote.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultResponse(
+data class MovieResponse(
     @SerializedName("adult")
     val adult: Boolean?,
     @SerializedName("backdrop_path")

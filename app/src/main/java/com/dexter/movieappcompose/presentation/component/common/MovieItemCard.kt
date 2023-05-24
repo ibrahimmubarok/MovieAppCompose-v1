@@ -27,7 +27,6 @@ import coil.compose.AsyncImage
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 import com.dexter.movieappcompose.presentation.ui.theme.Purple1
-import com.dexter.movieappcompose.presentation.ui.theme.PurpleGrey40
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
 import com.dexter.movieappcompose.presentation.ui.theme.White1
 
@@ -37,6 +36,8 @@ fun MovieItemCard(
     modifier: Modifier = Modifier,
     photoUrl: String,
     title: String,
+    movieId: Int,
+    onNavigateToDetail: (Int) -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -47,7 +48,7 @@ fun MovieItemCard(
             containerColor = MaterialTheme.colorScheme.surface
         ),
         onClick = {
-            // TODO :: OPEN DETAIL ACTIVITY
+            onNavigateToDetail(movieId)
         }
     ) {
         Column(
@@ -90,7 +91,11 @@ fun MovieItemCardPrev() {
     MovieAppComposeTheme {
         MovieItemCard(
             photoUrl = "https://raw.githubusercontent.com/dicodingacademy/assets/main/android_compose_academy/pahlawan/6.jpg",
-            title = "Spider-Man : Far From Home"
+            title = "Spider-Man : Far From Home",
+            movieId = 0,
+            onNavigateToDetail = {
+                // TODO : Navigate to Detail
+            }
         )
     }
 }

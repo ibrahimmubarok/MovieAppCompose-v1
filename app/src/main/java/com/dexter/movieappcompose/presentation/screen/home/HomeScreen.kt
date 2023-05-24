@@ -3,7 +3,6 @@ package com.dexter.movieappcompose.presentation.screen.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,11 +27,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dexter.movieappcompose.R
-import com.dexter.movieappcompose.data.remote.model.response.ResultResponse
+import com.dexter.movieappcompose.domain.model.Movie
 import com.dexter.movieappcompose.presentation.component.carousell.BannerAutoSlideCarousel
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.MovieItemCard
@@ -44,18 +42,17 @@ import com.dexter.movieappcompose.utils.common.UiState
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onNavigateToDetail: (Int) -> Unit,
 ) {
     val scrollState = rememberScrollState()
     ScrollableContent(
         scrollState = scrollState,
         viewModel = viewModel,
         modifier = modifier,
-    ) {
-        // TODO : Detail Activity
-    }
+        onNavigateToDetail = onNavigateToDetail
+    )
 }
 
 @Composable
@@ -63,7 +60,7 @@ fun ScrollableContent(
     scrollState: ScrollState,
     viewModel: HomeViewModel,
     modifier: Modifier,
-    onNavigateToDetail: () -> Unit
+    onNavigateToDetail: (Int) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -180,10 +177,10 @@ fun ScrollableContent(
 
 @Composable
 fun HorizontalMovieListContent(
-    movieUpComingData: List<ResultResponse>,
+    movieUpComingData: List<Movie>,
     labelTitle: String,
     modifier: Modifier = Modifier,
-    onNavigateToDetail: () -> Unit,
+    onNavigateToDetail: (Int) -> Unit,
 ) {
     val listState = rememberLazyListState()
 
@@ -196,13 +193,12 @@ fun HorizontalMovieListContent(
         contentPadding = PaddingValues(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(movieUpComingData, key = { it.id ?: 0 }) { movie ->
+        items(movieUpComingData, key = { it.id }) { movie ->
             MovieItemCard(
-                photoUrl = "${MovieConst.PHOTO_URL}${movie.posterPath.toString()}",
-                title = movie.title.toString(),
-                modifier = Modifier.clickable {
-                    onNavigateToDetail()
-                }
+                photoUrl = "${MovieConst.PHOTO_URL}${movie.posterPath}",
+                title = movie.title,
+                movieId = movie.id,
+                onNavigateToDetail = onNavigateToDetail
             )
         }
     }

@@ -9,6 +9,8 @@ enum class MovieScreens {
 
 sealed class MovieScreen(val route: String) {
     object HomeScreen : MovieScreen("home")
-    object DetailScreen : MovieScreen("detail")
     object AboutScreen : MovieScreen("about")
+    object DetailScreen : MovieScreen("detail/{movieId}") {
+        fun createRoute(movieId: Int) = "detail/$movieId"
+    }
 }
