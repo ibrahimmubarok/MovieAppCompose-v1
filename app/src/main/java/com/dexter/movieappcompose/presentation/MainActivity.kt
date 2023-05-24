@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dexter.movieappcompose.presentation.component.bottombar.BottomBar
 import com.dexter.movieappcompose.presentation.navigation.MovieScreen
+import com.dexter.movieappcompose.presentation.screen.about.AboutScreen
 import com.dexter.movieappcompose.presentation.screen.home.HomeScreen
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 import com.dexter.movieappcompose.presentation.ui.theme.Purple2
@@ -64,7 +65,9 @@ fun MovieApp(
                 )
             }
             composable(MovieScreen.AboutScreen.route) {
-
+                AboutScreen(
+                    navController = navController
+                )
             }
         }
     }

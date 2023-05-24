@@ -51,9 +51,10 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     ScrollableContent(
         scrollState = scrollState,
-        viewModel = viewModel
+        viewModel = viewModel,
+        modifier = modifier,
     ) {
-
+        // TODO : Detail Activity
     }
 }
 
@@ -61,10 +62,11 @@ fun HomeScreen(
 fun ScrollableContent(
     scrollState: ScrollState,
     viewModel: HomeViewModel,
+    modifier: Modifier,
     onNavigateToDetail: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .verticalScroll(scrollState)
             .background(Purple2)
     ) {
