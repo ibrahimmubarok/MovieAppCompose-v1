@@ -3,6 +3,7 @@ package com.dexter.movieappcompose.presentation.screen.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +25,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -34,7 +34,6 @@ import com.dexter.movieappcompose.domain.model.Movie
 import com.dexter.movieappcompose.presentation.component.carousell.BannerAutoSlideCarousel
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.MovieItemCard
-import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 import com.dexter.movieappcompose.presentation.ui.theme.Purple2
 import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
 import com.dexter.movieappcompose.utils.MovieConst
@@ -78,8 +77,11 @@ fun ScrollableContent(
                             textAlign = TextAlign.Center,
                         )
                     } else {
-                        val movieUpComingData = uiState.data.map {
-                            it.posterPath.orEmpty()
+                        val posterMovieUpComingData = uiState.data.map {
+                            it.posterPath
+                        }
+                        val idMovieUpComingData = uiState.data.map {
+                            it.id
                         }
                         Column {
                             BannerTitle(
@@ -91,7 +93,12 @@ fun ScrollableContent(
                                     bottom = 0.dp
                                 )
                             )
-                            NowPlayingMovieContent(imgMovie = movieUpComingData)
+                            NowPlayingMovieContent(
+                                imgMovieList = posterMovieUpComingData,
+                                idMovieList = idMovieUpComingData
+                            ) { movieId ->
+                                onNavigateToDetail.invoke(movieId)
+                            }
                         }
                     }
                 }
@@ -186,7 +193,12 @@ fun HorizontalMovieListContent(
 
     BannerTitle(
         text = labelTitle,
-        modifier = modifier
+        modifier = modifier.padding(
+            start = 8.dp,
+            end = 4.dp,
+            bottom = 8.dp,
+            top = 24.dp
+        )
     )
     LazyRow(
         state = listState,
@@ -207,7 +219,9 @@ fun HorizontalMovieListContent(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NowPlayingMovieContent(
-    imgMovie: List<String>,
+    imgMovieList: List<String>,
+    idMovieList: List<Int>,
+    onNavigateToDetail: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier.padding(
@@ -218,25 +232,22 @@ fun NowPlayingMovieContent(
         shape = RoundedCornerShape(16.dp),
     ) {
         BannerAutoSlideCarousel(
-            itemsCount = imgMovie.size,
+            itemsCount = imgMovieList.size,
             itemContent = { index ->
+                val movieId = idMovieList[index]
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data("${MovieConst.PHOTO_URL}${imgMovie[index]}")
+                        .data("${MovieConst.PHOTO_URL}${imgMovieList[index]}")
                         .build(),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(200.dp)
+                    modifier = Modifier
+                        .height(200.dp)
+                        .clickable {
+                            onNavigateToDetail.invoke(movieId)
+                        }
                 )
-            }
+            },
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    MovieAppComposeTheme {
-
     }
 }

@@ -19,3 +19,5 @@ val BlackLight = Color(0xFF222121)
 
 val Purple1 = Color(0xFF4A4458)
 val Purple2 = Color(0xFF2A2831)
+val Purple3 = Color(0xFF141B34)
+val SeaBlue = Color(0xFF556FE5)
