@@ -21,14 +21,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dexter.movieappcompose.presentation.component.bottombar.BottomBar
 import com.dexter.movieappcompose.presentation.navigation.MovieScreen
-import com.dexter.movieappcompose.presentation.navigation.Profile
-import com.dexter.movieappcompose.presentation.screen.TestScreen
 import com.dexter.movieappcompose.presentation.screen.about.AboutScreen
 import com.dexter.movieappcompose.presentation.screen.detail.DetailMovieScreen
 import com.dexter.movieappcompose.presentation.screen.home.HomeScreen
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 import com.dexter.movieappcompose.presentation.ui.theme.Purple2
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +40,6 @@ class MainActivity : ComponentActivity() {
                     color = Purple2,
                 ) {
                     MovieApp()
-//                    TabLayoutScreen()
                 }
             }
         }
@@ -80,9 +76,7 @@ fun MovieApp(
                 }
             }
             composable(MovieScreen.AboutScreen.route) {
-                AboutScreen { profile ->
-                    navController.navigate(MovieScreen.TestScreen.createRoute(profile))
-                }
+                AboutScreen()
             }
             composable(
                 route = MovieScreen.DetailScreen.route,
@@ -95,15 +89,6 @@ fun MovieApp(
                         navController.navigateUp()
                     }
                 )
-            }
-            composable(
-                route = MovieScreen.TestScreen.route,
-                arguments = listOf(navArgument("profile") { type = NavType.StringType }),
-            ) {
-                val profile = it.arguments?.getString("profile")?.let { data ->
-                    Gson().fromJson(data, Profile::class.java)
-                }
-                TestScreen(profile = profile ?: Profile())
             }
         }
     }
