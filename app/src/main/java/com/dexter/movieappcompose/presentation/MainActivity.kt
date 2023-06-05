@@ -3,15 +3,21 @@ package com.dexter.movieappcompose.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -23,6 +29,7 @@ import com.dexter.movieappcompose.presentation.component.bottombar.BottomBar
 import com.dexter.movieappcompose.presentation.navigation.MovieScreen
 import com.dexter.movieappcompose.presentation.screen.about.AboutScreen
 import com.dexter.movieappcompose.presentation.screen.detail.DetailMovieScreen
+import com.dexter.movieappcompose.presentation.screen.home.HomePagingScreen
 import com.dexter.movieappcompose.presentation.screen.home.HomeScreen
 import com.dexter.movieappcompose.presentation.ui.theme.MovieAppComposeTheme
 import com.dexter.movieappcompose.presentation.ui.theme.Purple2
@@ -48,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieApp(
+fun MainScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
@@ -94,10 +101,52 @@ fun MovieApp(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MovieAppComposeTheme {
+fun MovieApp(
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = MovieScreen.FirstScreen.route
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable(MovieScreen.MainScreen.route) {
+            MainScreen()
+        }
+        composable(MovieScreen.HomePagingScreen.route) {
+            HomePagingScreen()
+        }
+        composable(MovieScreen.FirstScreen.route) {
+            FirstScreen(
+                onNavigateToMainScreen = {
+                    navController.navigate(MovieScreen.MainScreen.route)
+                },
+                onNavigateToPagingScreen = {
+                    navController.navigate(MovieScreen.HomePagingScreen.route)
+                }
+            )
+        }
+    }
+}
 
+@Composable
+fun FirstScreen(
+    onNavigateToMainScreen: () -> Unit,
+    onNavigateToPagingScreen: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { onNavigateToMainScreen.invoke() }) {
+            Text(text = "Open Home Screen")
+        }
+        Spacer(modifier = Modifier.padding(vertical = 8.dp))
+        Button(onClick = { onNavigateToPagingScreen.invoke() }) {
+            Text(text = "Open Home Paging Screen")
+        }
     }
 }

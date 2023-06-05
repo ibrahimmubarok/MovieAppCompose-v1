@@ -2,12 +2,15 @@ package com.dexter.movieappcompose.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.dexter.movieappcompose.data.remote.repository.MovieRepository
 import com.dexter.movieappcompose.domain.model.Movie
 import com.dexter.movieappcompose.domain.model.toMovie
 import com.dexter.movieappcompose.utils.common.UiState
 import com.dexter.movieappcompose.utils.network.wrapper.DataResources
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -54,6 +57,10 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun getPagingPopularMovies(): Flow<PagingData<Movie>> {
+        return repository.getPagingPopularMovies().cachedIn(viewModelScope)
     }
 
     private fun getNowPlayingMovies() {
