@@ -17,7 +17,7 @@ fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(key1 = true, block = {
         delay(3000L)
-        navController.navigate(MovieScreens.HomeScreen.name)
+//        navController.navigate(MovieScreens.HomeScreen.name)
     })
 
     Box(

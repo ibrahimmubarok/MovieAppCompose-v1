@@ -10,7 +10,6 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -18,23 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.dexter.movieappcompose.utils.MovieConst.AUTO_SLIDE_DURATION
-import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BannerAutoSlideCarousel(
     modifier: Modifier = Modifier,
-    autoSlideDuration: Long = AUTO_SLIDE_DURATION,
     pagerState: PagerState = remember { PagerState() },
     itemsCount: Int,
     itemContent: @Composable (index: Int) -> Unit,
 ) {
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
-
-    LaunchedEffect(pagerState.currentPage) {
-        delay(autoSlideDuration)
-        pagerState.animateScrollToPage((pagerState.currentPage + 1) % itemsCount)
-    }
 
     Box(
         modifier = modifier.fillMaxWidth(),

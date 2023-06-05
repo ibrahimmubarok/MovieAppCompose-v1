@@ -1,7 +1,9 @@
 package com.dexter.movieappcompose.presentation.screen.about
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,20 +22,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dexter.movieappcompose.R
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
+import com.dexter.movieappcompose.presentation.navigation.Profile
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
 import com.dexter.movieappcompose.presentation.ui.theme.White1
+import com.google.gson.Gson
 
 @Composable
-fun AboutScreen() {
-    ProfileContent()
+fun AboutScreen(
+    onNavigateToTestScreen: (String) -> Unit
+) {
+    ProfileContent(onNavigateToTestScreen = onNavigateToTestScreen)
 }
 
 @Composable
 fun ProfileContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToTestScreen: (String) -> Unit,
 ) {
+    val data = Profile(
+        name = "Tom & Jerry",
+        address = "Jl. Cidodol, RT.009/RW.011"
+    )
+    val dataJson = Uri.encode(Gson().toJson(data))
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .clickable {
+                onNavigateToTestScreen.invoke(dataJson)
+            },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
