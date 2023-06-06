@@ -10,6 +10,8 @@ import com.dexter.movieappcompose.domain.model.toMovie
 import com.dexter.movieappcompose.utils.common.UiState
 import com.dexter.movieappcompose.utils.network.wrapper.DataResources
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,9 +35,13 @@ class HomeViewModel @Inject constructor(
     val popularMovieData: StateFlow<UiState<List<Movie>>> = _popularMovieData
 
     init {
-        getUpcomingMovies()
-        getPopularMovies()
-        getNowPlayingMovies()
+        viewModelScope.launch {
+            awaitAll(
+                async { getUpcomingMovies() },
+                async { getPopularMovies() },
+                async { getNowPlayingMovies() }
+            )
+        }
     }
 
     private fun getPopularMovies() {

@@ -108,4 +108,8 @@ dependencies {
     // Paging3
     implementation "androidx.paging:paging-runtime:3.1.1"
     implementation "androidx.paging:paging-compose:1.0.0-alpha15"
+
+    // Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+
 }
