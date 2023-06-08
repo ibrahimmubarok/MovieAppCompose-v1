@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dexter.movieappcompose.R
-import com.dexter.movieappcompose.domain.model.Movie
+import com.dexter.movieappcompose.domain.model.movie.Movie
 import com.dexter.movieappcompose.utils.MovieConst
 
 @Composable

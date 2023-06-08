@@ -31,14 +31,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dexter.movieappcompose.R
-import com.dexter.movieappcompose.domain.model.Movie
+import com.dexter.movieappcompose.domain.model.movie.Movie
 import com.dexter.movieappcompose.presentation.component.carousell.BannerAutoSlideCarousel
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.MovieItemCard
 import com.dexter.movieappcompose.presentation.ui.theme.Purple2
-import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
+import com.dexter.movieappcompose.presentation.viewmodel.movie.HomeViewModel
 import com.dexter.movieappcompose.utils.MovieConst
-import com.dexter.movieappcompose.utils.common.UiState
+import com.dexter.movieappcompose.utils.common.state.UiState
 
 @Composable
 fun HomeScreen(

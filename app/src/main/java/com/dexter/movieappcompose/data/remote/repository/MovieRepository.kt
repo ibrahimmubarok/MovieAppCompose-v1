@@ -5,10 +5,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.dexter.movieappcompose.data.paging_sources.MoviePagingSource
 import com.dexter.movieappcompose.data.remote.model.response.BaseResponse
-import com.dexter.movieappcompose.data.remote.model.response.DetailMovieResponse
-import com.dexter.movieappcompose.data.remote.model.response.MovieResponse
+import com.dexter.movieappcompose.data.remote.model.response.movie.DetailMovieResponse
+import com.dexter.movieappcompose.data.remote.model.response.movie.MovieResponse
 import com.dexter.movieappcompose.data.remote.services.MovieApiServices
-import com.dexter.movieappcompose.domain.model.Movie
+import com.dexter.movieappcompose.domain.model.movie.Movie
 import com.dexter.movieappcompose.utils.network.ApiHandler
 import com.dexter.movieappcompose.utils.network.wrapper.DataResources
 import kotlinx.coroutines.flow.Flow

@@ -1,7 +1,8 @@
 package com.dexter.movieappcompose.data.remote.repository
 
 import com.dexter.movieappcompose.data.remote.model.response.BaseResponse
-import com.dexter.movieappcompose.data.remote.model.response.TvShowResponse
+import com.dexter.movieappcompose.data.remote.model.response.tv_show.DetailTvShowResponse
+import com.dexter.movieappcompose.data.remote.model.response.tv_show.TvShowResponse
 import com.dexter.movieappcompose.data.remote.services.TvShowApiServices
 import com.dexter.movieappcompose.utils.network.ApiHandler
 import com.dexter.movieappcompose.utils.network.wrapper.DataResources
@@ -13,6 +14,7 @@ interface TvShowRepository {
     suspend fun getTopRatedTvShow(): Flow<DataResources<BaseResponse<TvShowResponse>>>
     suspend fun getPopularTvShow(): Flow<DataResources<BaseResponse<TvShowResponse>>>
     suspend fun getOnAirTvShow(): Flow<DataResources<BaseResponse<TvShowResponse>>>
+    suspend fun getDetailTvShow(tvShowId: Int): Flow<DataResources<DetailTvShowResponse>>
 }
 
 class TvShowRepositoryImpl(private val apiServices: TvShowApiServices) : TvShowRepository {
@@ -34,6 +36,13 @@ class TvShowRepositoryImpl(private val apiServices: TvShowApiServices) : TvShowR
         flow {
             emit(ApiHandler.handleApi {
                 apiServices.getOnAirTvShow()
+            })
+        }
+
+    override suspend fun getDetailTvShow(tvShowId: Int): Flow<DataResources<DetailTvShowResponse>> =
+        flow {
+            emit(ApiHandler.handleApi {
+                apiServices.getDetailTvShow(seriesId = tvShowId)
             })
         }
 }

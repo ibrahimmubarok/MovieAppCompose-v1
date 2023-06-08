@@ -2,8 +2,8 @@ package com.dexter.movieappcompose.data.remote.services
 
 import com.dexter.movieappcompose.BuildConfig
 import com.dexter.movieappcompose.data.remote.model.response.BaseResponse
-import com.dexter.movieappcompose.data.remote.model.response.DetailMovieResponse
-import com.dexter.movieappcompose.data.remote.model.response.MovieResponse
+import com.dexter.movieappcompose.data.remote.model.response.movie.DetailMovieResponse
+import com.dexter.movieappcompose.data.remote.model.response.movie.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

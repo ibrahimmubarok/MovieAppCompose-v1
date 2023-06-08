@@ -36,16 +36,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.dexter.movieappcompose.R
-import com.dexter.movieappcompose.domain.model.DetailMovie
-import com.dexter.movieappcompose.domain.model.Genre
+import com.dexter.movieappcompose.domain.model.movie.DetailMovie
+import com.dexter.movieappcompose.domain.model.movie.Genre
 import com.dexter.movieappcompose.presentation.component.common.BackButton
 import com.dexter.movieappcompose.presentation.component.common.BannerTitle
 import com.dexter.movieappcompose.presentation.component.common.ChipItem
 import com.dexter.movieappcompose.presentation.ui.theme.Typography
 import com.dexter.movieappcompose.presentation.ui.theme.White1
-import com.dexter.movieappcompose.presentation.viewmodel.DetailMovieViewModel
+import com.dexter.movieappcompose.presentation.viewmodel.movie.DetailMovieViewModel
 import com.dexter.movieappcompose.utils.MovieConst
-import com.dexter.movieappcompose.utils.common.UiState
+import com.dexter.movieappcompose.utils.common.state.UiState
 
 @Composable
 fun DetailMovieScreen(

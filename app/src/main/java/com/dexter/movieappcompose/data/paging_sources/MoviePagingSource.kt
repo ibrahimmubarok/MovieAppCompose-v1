@@ -3,8 +3,8 @@ package com.dexter.movieappcompose.data.paging_sources
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.dexter.movieappcompose.data.remote.services.MovieApiServices
-import com.dexter.movieappcompose.domain.model.Movie
-import com.dexter.movieappcompose.domain.model.toMovie
+import com.dexter.movieappcompose.domain.model.movie.Movie
+import com.dexter.movieappcompose.domain.model.movie.toMovie
 import com.dexter.movieappcompose.utils.network.ApiHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -2,8 +2,8 @@ package com.dexter.movieappcompose.data.remote.services
 
 import com.dexter.movieappcompose.BuildConfig
 import com.dexter.movieappcompose.data.remote.model.response.BaseResponse
-import com.dexter.movieappcompose.data.remote.model.response.DetailMovieResponse
-import com.dexter.movieappcompose.data.remote.model.response.TvShowResponse
+import com.dexter.movieappcompose.data.remote.model.response.tv_show.DetailTvShowResponse
+import com.dexter.movieappcompose.data.remote.model.response.tv_show.TvShowResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -31,5 +31,5 @@ interface TvShowApiServices {
     suspend fun getDetailTvShow(
         @Path("series_id") seriesId: Int,
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
-    ): DetailMovieResponse
+    ): DetailTvShowResponse
 }

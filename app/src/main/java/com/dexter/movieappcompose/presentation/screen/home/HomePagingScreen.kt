@@ -14,7 +14,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.dexter.movieappcompose.presentation.component.common.ErrorItem
 import com.dexter.movieappcompose.presentation.component.common.MovieListCard
-import com.dexter.movieappcompose.presentation.viewmodel.HomeViewModel
+import com.dexter.movieappcompose.presentation.viewmodel.movie.HomeViewModel
 
 @Composable
 fun HomePagingScreen(
