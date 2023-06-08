@@ -6,6 +6,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.dexter.movieappcompose.BuildConfig
 import com.dexter.movieappcompose.data.remote.services.MovieApiServices
+import com.dexter.movieappcompose.data.remote.services.TvShowApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,5 +72,18 @@ object AppModule {
             .client(okHttpClient)
             .build()
             .create(MovieApiServices::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesTvShowApi(
+        okHttpClient: OkHttpClient
+    ): TvShowApiServices {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create(TvShowApiServices::class.java)
     }
 }
